@@ -87,7 +87,7 @@ function setup_sms() {
     ironic node-list | grep "|\s*${sms_name}$\s*|"
     node_exists=$?
     if [ "${node_exists}" -ne "0" ]; then
-        ironic node-create -d pxe_ipmitool -i deploy_kernel=${DEPLOY_VMLINUZ_UUID} -i deploy_ramdisk=${DEPLOY_INITRD_UUID} -i ipmi_terminal_port=8023 -i ipmi_address=${sms_bmc} -i ipmi_username=${sms_bmc_username} -i ipmi_password=${sms_bmc_password} -p cpus=${CPU} -p memory_mb=${RAM_MB} -p local_gb=${DISK_GB} -p cpu_arch=${ARCH} -p capabilities="boot_mode:bios" -n ${sms_name}
+        ironic node-create -d fake_pxe -i deploy_kernel=${DEPLOY_VMLINUZ_UUID} -i deploy_ramdisk=${DEPLOY_INITRD_UUID} -i ipmi_terminal_port=8023 -i ipmi_address=${sms_bmc} -i ipmi_username=${sms_bmc_username} -i ipmi_password=${sms_bmc_password} -p cpus=${CPU} -p memory_mb=${RAM_MB} -p local_gb=${DISK_GB} -p cpu_arch=${ARCH} -p capabilities="boot_mode:bios" -n ${sms_name}
     fi
     SMS_UUID=`ironic node-list | grep "|\s*${sms_name}\s*|" | awk '{print $2}'`
 
@@ -118,7 +118,7 @@ function setup_cn() {
         ironic node-list | grep "|\s*${cnodename_prefix}$((i+1))\s*|"
         node_exists=$?
         if [ "${node_exists}" -ne "0" ]; then
-            ironic node-create -d pxe_ipmitool -i deploy_kernel=${DEPLOY_VMLINUZ_UUID} -i deploy_ramdisk=${DEPLOY_INITRD_UUID} -i ipmi_terminal_port=8023 -i ipmi_address=${cc_bmc[$i]} -i ipmi_username=${cc_bmc_username} -i ipmi_password=${cc_bmc_password} -p cpus=${CPU} -p memory_mb=${RAM_MB} -p local_gb=${DISK_GB} -p cpu_arch=${ARCH} -p capabilities="boot_mode:bios" -n ${cnodename_prefix}$((i+1))
+            ironic node-create -d fake_pxe -i deploy_kernel=${DEPLOY_VMLINUZ_UUID} -i deploy_ramdisk=${DEPLOY_INITRD_UUID} -i ipmi_terminal_port=8023 -i ipmi_address=${cc_bmc[$i]} -i ipmi_username=${cc_bmc_username} -i ipmi_password=${cc_bmc_password} -p cpus=${CPU} -p memory_mb=${RAM_MB} -p local_gb=${DISK_GB} -p cpu_arch=${ARCH} -p capabilities="boot_mode:bios" -n ${cnodename_prefix}$((i+1))
         fi
         NODE_UUID_CC[$i]=`ironic node-list | grep "|\s*${cnodename_prefix}$((i+1))\s*|" | awk '{print $2}'`
 
@@ -158,7 +158,7 @@ function boot_cn() {
 #ironic node-list | grep "|\s*${sms_name}$\s*|"
 #node_exists=$?
 #if [ "${node_exists}" -ne "0" ]; then
-#    ironic node-create -d pxe_ipmitool -i deploy_kernel=${DEPLOY_VMLINUZ_UUID} -i deploy_ramdisk=${DEPLOY_INITRD_UUID} -i ipmi_terminal_port=8023 -i ipmi_address=${sms_bmc} -i ipmi_username=${sms_bmc_username} -i ipmi_password=${sms_bmc_password} -p cpus=${CPU} -p memory_mb=${RAM_MB} -p local_gb=${DISK_GB} -p cpu_arch=${ARCH} -p capabilities="boot_mode:bios" -n ${sms_name}
+#    ironic node-create -d fake_pxe -i deploy_kernel=${DEPLOY_VMLINUZ_UUID} -i deploy_ramdisk=${DEPLOY_INITRD_UUID} -i ipmi_terminal_port=8023 -i ipmi_address=${sms_bmc} -i ipmi_username=${sms_bmc_username} -i ipmi_password=${sms_bmc_password} -p cpus=${CPU} -p memory_mb=${RAM_MB} -p local_gb=${DISK_GB} -p cpu_arch=${ARCH} -p capabilities="boot_mode:bios" -n ${sms_name}
 #fi
 #SMS_UUID=`ironic node-list | grep "|\s*${sms_name}\s*|" | awk '{print $2}'`
 
