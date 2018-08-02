@@ -1,0 +1,59 @@
+## Template for INVENTORY
+## HPC Base package   -   
+## Currently supported,
+##     orch -> Intel HPC Orchestrator
+##     ohpc -> OpenHPC
+##
+##
+#chpc_base="orch"
+chpc_base="ohpc"
+# HPC slurm partition that needs to be extended. Specified by the admin
+hpc_slurm_partition=normal
+# list Compute nodes
+# Prefix for compute node hostnames
+cnodename_prefix="cc"
+# Local (internal) hostname on SMS
+controller_name="sms"
+# Local (internal) IP address on SMS
+controller_ip="192.168.19.137"
+# cloud subnet CIDR
+cc_subnet_cidr="192.168.19.0/24"
+# cloud subnet DHCP range
+cc_subnet_dhcp_start="192.168.19.138"
+cc_subnet_dhcp_end="192.168.19.145"
+sms_mac=00:0C:29:CD:DA:92
+sms_bmc=10.0.0.2
+# BMC user credentials for use by IPMI
+sms_bmc_username="root"
+sms_bmc_password="root"
+# cloud compute node IP addresses
+# might need to get MAC and IP from Nova and use here, TBD
+cc_ip[0]=192.168.19.138
+#cc_ip[1]=
+#cc_ip[2]=
+# cloud compute node MAC addreses for provisioning interface
+cc_mac[0]=00:50:56:2F:EC:42
+#cc_mac[1]=
+#cc_mac[2]=
+# cloud compute node BMC addresses
+cc_bmc[0]=10.0.0.3
+# cc_bmc[1]=
+# cc_bmc[2]=
+# cloud node BMC username and password
+cc_bmc_username="root"
+cc_bmc_password="root"
+#cloud compute node characterstics (aka nova flavor)
+RAM_MB=2192   		#PROVIDED AS AN EXAMPLE. CHECK YOUR SETTINGS!
+CPU=4			#PROVIDED AS AN EXAMPLE. CHECK YOUR SETTINGS!
+DISK_GB=20		#PROVIDED AS AN EXAMPLE. CHECK YOUR SETTINGS!
+ARCH=x86_64		#PROVIDED AS AN EXAMPLE. CHECK YOUR SETTINGS!
+SOCKETS=4		#PROVIDED AS AN EXAMPLE. CHECK YOUR SETTINGS!
+CORES_PER_SOCKET=2	#PROVIDED AS AN EXAMPLE. CHECK YOUR SETTINGS!
+THREADS_PER_CORE=2	#PROVIDED AS AN EXAMPLE. CHECK YOUR SETTINGS!
+# Cloud Compute Node Images (Adjust if you use your own images, or change the default location)
+chpc_image_deploy_kernel="${chpc_image_deploy_kernel=/opt/ohpc/admin/images/cloud/ironic-deploy.kernel}"
+chpc_image_deploy_ramdisk="${chpc_image_deploy_ramdisk=/opt/ohpc/admin/images/cloud/ironic-deploy.initramfs}"
+chpc_image_user="${chpc_image_user=/opt/ohpc/admin/images/cloud/icloud-hpc-cent7.qcow2}"
+chpc_image_sms="${chpc_image_sms=/opt/ohpc/admin/images/cloud/icloud-hpc-cent7-sms.qcow2}"
+chpc_create_new_image="${chpc_create_new_image=0}"
+# # 
