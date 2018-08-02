@@ -1,5 +1,6 @@
 #!/bin/bash
-sudo cp -L -f $DIB_YUM_REPO_CONF $TMP_MOUNT_PATH/etc/yum.repos.d/dib-yum-repo-conf.repo
+export DIB_YUM_REPO_CONF=/etc/yum.repos.d/OpenHPC.repo
+sudo cp -L -f $DIB_YUM_REPO_CONF $TMP_MOUNT_PATH/etc/yum.repos.d/OpenHPC.repo
 if [ ${DIB_DEBUG_TRACE:-0} -gt 0 ]; then
     set -x
 fi
